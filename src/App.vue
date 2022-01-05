@@ -1,41 +1,49 @@
 <template>
-  <template
-    v-for="todo in todos"
-    :key="todo.id"
-  >
-    <todo-item
-      :todo="todo"
-      :focused="(todo.id === currentId)"
-      @click="() => {select(todo.id); return false;}"
-    />
-  </template>
+  <navbar />
 
-  <div class="form">
-    <base-input
-      v-model="newTodo"
-      @enter-keyup="saveTodo"
-    />
-
-    <button
-      class="btn btn-save"
-      @click="saveTodo"
+  <div>
+    <template
+      v-for="todo in todos"
+      :key="todo.id"
     >
-      Save
-    </button>
+      <todo-item
+        :todo="todo"
+        :focused="(todo.id === currentId)"
+        @click="() => {select(todo.id); return false;}"
+      />
+    </template>
+
+    <div class="flex p-10">
+      <base-input
+        v-model="newTodo"
+        class="flex-grow"
+        @enter-keyup="saveTodo"
+      />
+
+      <base-button
+        @click="saveTodo"
+      >
+        Save
+      </base-button>
+    </div>
   </div>
 </template>
 
 <script>
-import BaseInput from '@/components/BaseInput'
-import TodoItem from '@/components/TodoItem'
+import BaseButton from '@/components/BaseButton.vue'
+import Navbar from '@/components/Navbar.vue'
+import BaseInput from '@/components/BaseInput.vue'
+import TodoItem from '@/components/TodoItem.vue'
 import {
   database, todos, addTodo,
-} from '@/hooks/useTodos'
+} from '@/hooks/useTodos.js'
 
 export default {
   name: 'App',
 
   components: {
+    BaseButton,
+    Navbar,
     BaseInput,
     TodoItem,
   },
@@ -75,25 +83,3 @@ export default {
   },
 }
 </script>
-
-<style>
-
-.form {
-    padding: 10px;
-    display: flex;
-}
-
-.btn-save {
-    background-color: var(--c-green);
-    border: 0;
-    border-radius: 50px;
-    box-shadow: 0px 1px 1px 0px var(--c-green-dark);
-    padding: 10px;
-    color: var(--c-green-darker);
-}
-
-.btn-save:hover {
-    background-color: var(--c-green-dark);
-}
-
-</style>

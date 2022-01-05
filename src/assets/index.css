@@ -1,5 +1,7 @@
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 :root {
@@ -11,8 +13,6 @@
 
 html,
 body {
-    margin: 0;
-    padding: 0;
     width: 100%;
 }
 
@@ -24,7 +24,6 @@ body {
 #app {
     margin: 0 auto;
     min-width: 200px;
-    padding: 10px;
     width: 100%;
 }
 
@@ -34,18 +33,25 @@ body {
     }
 }
 
-.btn {
-    cursor: pointer;
-    font-family: 'Montserrat', Vazir;
-    font-weight: 500;
-}
-
 /**
  * Utility
  */
 
 .bold {
     font-weight: bold;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-grow {
+    flex-grow: 1;
+}
+
+.p-10 {
+    padding: 10px;
+
 }
 
 .linethrough {
