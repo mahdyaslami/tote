@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,59 +9,34 @@
 }
 
 :root {
-    --c-green-light: #e6ffe6;
-    --c-green: #e0f7e0;
-    --c-green-dark: #b2d8b2;
-    --c-green-darker: #677767;
+    --color-primary-light: 230 255 230;
+    --color-primary-default: 224 247 224;
+    --color-primary-dark: 178 216 178;
+    --color-primary-darker: 103 119 103;
 }
 
 html,
 body {
+    font-size: 16px;
     width: 100%;
+    height: 100%;
+    min-height: 0;
 }
 
-body {
-    background-color: var(--c-green-light);
-    font-family: 'Montserrat', Vazir;
+.font-montserrat-vazir {
+    font-family: 'Montserrat', Vazirmatn;
 }
 
-#app {
-    margin: 0 auto;
-    min-width: 200px;
-    width: 100%;
+.dir-rtl {
+    direction: rtl;
+    unicode-bidi: embed;
 }
 
-@media (min-width: 640px) {
-    #app {
-        width: 500px;
-    }
+.dir-ltr {
+    direction: ltr;
+    unicode-bidi: embed;
 }
 
-/**
- * Utility
- */
-
-.bold {
-    font-weight: bold;
-}
-
-.flex {
-    display: flex;
-}
-
-.flex-grow {
-    flex-grow: 1;
-}
-
-.p-10 {
-    padding: 10px;
-
-}
-
-.linethrough {
-    text-decoration-line: line-through;
-}
-
-.underline {
-    text-decoration-line: underline;
+.line-through.underline {
+    text-decoration: underline line-through;
 }

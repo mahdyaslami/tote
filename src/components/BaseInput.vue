@@ -1,7 +1,11 @@
 <template>
-  <div class="title-input p-10">
-    <div class="image">
+  <div
+    class="p-2.5 border border-solid border-gray-300 rounded-full flex items-center
+    mr-2.5 bg-white"
+  >
+    <div class="py-0 pl-1">
       <img
+        class="h-10 w-10 -my-2.5"
         src="@/assets/writing-hand.gif"
         alt="writing-hand"
       >
@@ -9,65 +13,47 @@
 
     <input
       v-model="value"
+      class="flex-grow border-0 focus:outline-none"
       type="text"
       dir="auto"
       @keyup.enter="$emit('enterKeyup')"
     >
+
+    <button
+      v-show="clearable"
+      class="pt-2 -my-2"
+      @click="$emit('clearClick')"
+    >
+      <clear-icon />
+    </button>
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    modelValue: {
-      type: String,
-      required: true,
-    },
+<script setup>
+import ClearIcon from '@/components/icons/ClearIcon'
+import { computed } from 'vue'
+
+const props = defineProps({
+  modelValue: {
+    type: String,
+    required: true,
   },
 
-  emits: ['update:modelValue', 'enterKeyup'],
-
-  computed: {
-    value: {
-      get() {
-        return this.modelValue
-      },
-
-      set(val) {
-        return this.$emit('update:modelValue', val)
-      },
-    },
+  clearable: {
+    type: Boolean,
+    default: false,
   },
-}
+})
+
+const emits = defineEmits(['update:modelValue', 'enterKeyup', 'clearClick'])
+
+const value = computed({
+  get() {
+    return props.modelValue
+  },
+
+  set(val) {
+    return emits('update:modelValue', val)
+  },
+})
 </script>
-
-<style scoped>
-.title-input {
-    border: 1px solid lightgrey;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    margin-right: 10px;
-    background-color: white;
-}
-
-.image {
-    padding: 0 15px;
-}
-
-img {
-    height: 40px;
-    width: 40px;
-    margin: -10px;
-}
-
-input {
-    flex-grow: 1;
-    border: 0;
-    font-family: 'Montserrat', Vazir;
-}
-
-input:focus {
-    outline: 0;
-}
-</style>

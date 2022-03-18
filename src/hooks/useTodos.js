@@ -1,27 +1,39 @@
-import { ref, watchEffect } from 'vue'
+import { v4 as uuid } from 'uuid'
+import { useDatabase } from './useDatabase'
 
-export const database = document.location.pathname.split('/').pop()
+const { todos } = useDatabase()
 
-export const todos = ref(
-  JSON.parse(localStorage.getItem(database)) ?? [],
-)
-
-watchEffect(() => localStorage.setItem(database, JSON.stringify(todos.value)))
-
-export function addTodo(text) {
-  todos.value.push({
-    id: new Date().getTime(),
+function addTodo(text, groupId) {
+  todos.push({
+    id: uuid(),
     text,
+    group_id: groupId,
     completed: false,
   })
 }
 
-export function completeTodo(id) {
-  const todo = todos.value.find((item) => item.id === id)
+function completeTodo(id) {
+  const todo = todos.find((item) => item.id === id)
   todo.completed = !todo.completed
 }
 
-export function deleteTodo(id) {
-  const index = todos.value.findIndex((todo) => todo.id === id)
-  todos.value.splice(index, 1)
+function deleteTodo(id) {
+  const index = todos.findIndex((todo) => todo.id === id)
+  todos.splice(index, 1)
+}
+
+function filterByGroupId(groupId) {
+  return todos.filter(
+    (todo) => todo.group_id == groupId,
+  )
+}
+
+export function useTodos() {
+  return {
+    todos,
+    addTodo,
+    completeTodo,
+    deleteTodo,
+    filterByGroupId,
+  }
 }

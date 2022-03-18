@@ -2,7 +2,8 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "node": false
+    "node": false,
+    "vue/setup-compiler-macros": true
   },
   "extends": [
     "plugin:vue/vue3-essential",
@@ -11,7 +12,8 @@
     "airbnb-base"
   ],
   "parserOptions": {
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaVersion": 2020
   },
   "plugins": [
     "vue"
@@ -50,7 +52,10 @@
         "props": false
       }
     ],
+    "no-plusplus": "off",
+    "no-undef": "warn",
     "no-unused-vars": "warn",
+    "no-use-before-define": "off",
     "quotes": [
       "error",
       "single"
