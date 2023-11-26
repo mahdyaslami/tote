@@ -1,6 +1,11 @@
 {
   "appId": "ir.rezero.tote",
-  "appName": "tote",
+  "appName": "Tote",
   "webDir": "dist",
-  "bundledWebRuntime": false
+  "bundledWebRuntime": false,
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  }
 }
